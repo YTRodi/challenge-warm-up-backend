@@ -1,0 +1,22 @@
+{
+	"name": "challenge-warm-up-backend",
+	"version": "1.0.0",
+	"description": "Backend para el challenge de warm up - Alkemy",
+	"main": "index.js",
+	"scripts": {
+		"dev": "nodemon index.js",
+		"start": "node index.js"
+	},
+	"author": "Rodi Yago",
+	"license": "ISC",
+	"dependencies": {
+		"chalk": "^4.1.0",
+		"dotenv": "^8.2.0",
+		"express": "^4.17.1",
+		"express-validator": "^6.10.0",
+		"morgan": "^1.10.0",
+		"mysql2": "^2.2.5",
+		"nodemon": "^2.0.7",
+		"sequelize": "^6.5.0"
+	}
+}
