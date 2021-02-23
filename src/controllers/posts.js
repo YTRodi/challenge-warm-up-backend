@@ -105,9 +105,44 @@ const updatePost = async (req, res = response) => {
 	}
 };
 
+const deletePost = async (req, res = response) => {
+	const { id } = req.params;
+
+	try {
+		const postById = await Post.findOne({
+			where: { id },
+		});
+
+		if (!postById)
+			return res.status(400).json({
+				ok: false,
+				msg: `There is no post with that id.`,
+			});
+
+		const result = await Post.destroy({
+			where: { id },
+		});
+
+		if (result !== 0) {
+			res.status(200).json({
+				ok: true,
+				msg: 'deleted successfully',
+			});
+		}
+	} catch (error) {
+		console.log(chalk.bgRed(error));
+
+		res.status(500).json({
+			ok: false,
+			msg: `The resource couldn't be updated - Please talk to the administrator.`,
+		});
+	}
+};
+
 module.exports = {
 	add: createPost,
 	list: getPosts,
 	getPostById,
 	update: updatePost,
+	deletePost,
 };
