@@ -3,9 +3,20 @@ const chalk = require('chalk');
 
 const { Post } = require('../database/database');
 const { handleArrayOfPosts } = require('../helpers/handleArray');
+const isImageURL = require('valid-image-url');
 
 const createPost = async (req, res = response) => {
+	const { image } = req.body;
+
 	try {
+		const isValidImgUrl = await isImageURL(image);
+
+		if (!isValidImgUrl)
+			return res.status(400).json({
+				ok: false,
+				msg: `The url of the image isn't valid.`,
+			});
+
 		const bodyPost = {
 			...req.body,
 			createdAt: new Date(),
