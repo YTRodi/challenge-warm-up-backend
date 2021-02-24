@@ -107,6 +107,7 @@ const updatePost = async (req, res = response) => {
 		res.status(200).json({
 			ok: true,
 			post: updatePost,
+			msg: 'Updated successfully',
 			affectedRows: numberOfAffectedRows,
 		});
 	} catch (error) {
@@ -140,7 +141,7 @@ const deletePost = async (req, res = response) => {
 		if (result !== 0) {
 			res.status(200).json({
 				ok: true,
-				msg: 'deleted successfully',
+				msg: 'Deleted successfully',
 			});
 		}
 	} catch (error) {
