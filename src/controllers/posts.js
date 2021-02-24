@@ -2,6 +2,7 @@ const { response } = require('express');
 const chalk = require('chalk');
 
 const { Post } = require('../database/database');
+const { handleArrayOfPosts } = require('../helpers/handleArray');
 
 const createPost = async (req, res = response) => {
 	try {
@@ -28,11 +29,13 @@ const createPost = async (req, res = response) => {
 
 const getPosts = async (req, res = response) => {
 	try {
-		const result = await Post.findAll();
+		const allPosts = await Post.findAll();
+
+		const result = handleArrayOfPosts(allPosts);
 
 		res.status(200).json({
 			ok: true,
-			operations: result,
+			posts: result,
 		});
 	} catch (error) {
 		console.log(chalk.bgRed(error));
